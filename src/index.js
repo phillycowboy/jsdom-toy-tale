@@ -38,6 +38,27 @@ function renderToys(toy) {
   toyDiv.append(newToy);
 }
 
+function createToy(name, image, likes) {
+  let configObj = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({name, image, likes})
+  };
+  return fetch(baseUrl, configObj)
+  .then(function (res){
+    return res.json()
+  })
+  .then(function (json){
+    console.log(json)
+  }) 
+  .catch(function(error){
+    console.log(error)
+  }); 
+}
+
 getToys();
 
 
@@ -46,8 +67,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const addBtn = document.querySelector("#new-toy-btn");
   const toyFormContainer = document.querySelector(".container");
   
-  addBtn.addEventListener("click", () => {
+  addBtn.addEventListener("click", (e) => {
           // hide & seek with the form
+          e.preventDefault();
           addToy = !addToy;
           if (addToy) {
             toyFormContainer.style.display = "block";
