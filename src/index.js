@@ -16,9 +16,25 @@ function getToys() {
 
 function renderToys(toy) {
   console.log(toy);
-    const newToy = document.createElement('div')
-    newToy.innerText = toy.name
-    toyDiv.append(newToy)
+  let name = toy.name;
+  let image = toy.image;
+  let likes = toy.likes;
+  const newToy = document.createElement('div');
+  const h2 = document.createElement('h2');
+  const img = document.createElement('img');
+  const p = document.createElement('p');
+  const btn = document.createElement('button');
+  newToy.classList = "card";
+  h2.innerText = name;
+  img.src = image;
+  p.innerText = likes;
+  img.classList = "toy-avatar";
+  btn.classList = "like-btn"
+  newToy.append(h2);
+  newToy.append(img);
+  newToy.append(p);
+  newToy.append(btn);
+  toyDiv.append(newToy);
 }
 
 getToys();
