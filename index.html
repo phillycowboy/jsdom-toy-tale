@@ -13,14 +13,15 @@
   </div>
 
   <div class="container">
-    <form class="add-toy-form" action="http://localhost:3000/toys" method="POST">
+    <form class="add-toy-form" id="add-new-toy">
+
       <h3>Create a toy!</h3>
 
       <input type="text" name="name" id="name" value="" placeholder="Enter a toy's name..." class="input-text" />
       <br />
       <input type="text" name="image" id="image" value="" placeholder="Enter a toy's image URL..." class="input-text" />
       <br />
-      <input type="submit" name="submit" value="Create New Toy" class="submit" />
+      <input type="submit" name="submit" value="Create New Toy" class="submit" id="submit" />
     </form>
   </div>
   <p style="text-align:center">

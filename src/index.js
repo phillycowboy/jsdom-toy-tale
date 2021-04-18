@@ -38,16 +38,19 @@ function renderToys(toy) {
   toyDiv.append(newToy);
 }
 
-function createToy(name, image, likes) {
+function createToy() {
+  console.log("I was clicked");
+  console.log("image", image)
+  console.log("likes", likes)
   let configObj = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json"
     },
-    body: JSON.stringify({name, image, likes})
+    body: JSON.stringify({name, image, "likes": 0})
   };
-  return fetch(baseUrl, configObj)
+  fetch(baseUrl, configObj)
   .then(function (res){
     return res.json()
   })
@@ -59,23 +62,53 @@ function createToy(name, image, likes) {
   }); 
 }
 
+
 getToys();
 
 
-
 document.addEventListener("DOMContentLoaded", () => {
+  const submitBtn = document.querySelector("#submit");
+  const toyForm = document.querySelector('#add-new-toy');
   const addBtn = document.querySelector("#new-toy-btn");
   const toyFormContainer = document.querySelector(".container");
+
+  toyForm.addEventListener('submit', (e) =>{
+    // console.log(toy);
+    let name = e.target[0].value;
+    let image = e.target[1].value;
+    const newToy = document.createElement('div');
+    const h2 = document.createElement('h2');
+    const img = document.createElement('img');
+    const p = document.createElement('p');
+    const btn = document.createElement('button');
+    newToy.classList = "card";
+    h2.innerText = name;
+    img.src = image;
+    // p.innerText = likes;
+    img.classList = "toy-avatar";
+    btn.classList = "like-btn";
+    btn.innerText = "LIKE!!";
+    newToy.append(h2);
+    newToy.append(img);
+    newToy.append(p);
+    newToy.append(btn);
+    toyDiv.append(newToy);
+  })
   
-  addBtn.addEventListener("click", (e) => {
+  addBtn.addEventListener("click", () => {
           // hide & seek with the form
-          e.preventDefault();
+          // console.log(submitBtn);
           addToy = !addToy;
           if (addToy) {
             toyFormContainer.style.display = "block";
           } else {
             toyFormContainer.style.display = "none";
           }
+          // submitBtn.addEventListener('submit', function(e){
+          //   e.preventDefault();
+          //   createToy();
+          //   console.log("Did i make it?")
+          // })
         });
         
         
