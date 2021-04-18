@@ -29,7 +29,8 @@ function renderToys(toy) {
   img.src = image;
   p.innerText = likes;
   img.classList = "toy-avatar";
-  btn.classList = "like-btn"
+  btn.classList = "like-btn";
+  btn.innerText = "LIKE!!";
   newToy.append(h2);
   newToy.append(img);
   newToy.append(p);
