@@ -38,7 +38,7 @@ function renderToys(toy) {
   toyDiv.append(newToy);
 }
 
-function createToy(name, image) {
+function createToy(name, image, likes) {
   console.log("I was clicked");
   console.log("image", image)
   console.log("likes", likes)
@@ -48,14 +48,14 @@ function createToy(name, image) {
       "Content-Type": "application/json",
       "Accept": "application/json"
     },
-    body: JSON.stringify({name, image, "likes": 0})
+    body: JSON.stringify({"name": name, "image": image, "likes": likes})
   };
-  fetch(baseUrl, configObj)
+   return fetch(baseUrl, configObj)
   .then(function (res){
     return res.json()
   })
   .then(function (json){
-    console.log(json)
+    renderToys({id: json.id, "name": name, "image": image, "likes": likes});
   }) 
   .catch(function(error){
     console.log(error)
@@ -74,26 +74,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
   toyForm.addEventListener('submit', (e) =>{
     e.preventDefault();
-    // console.log(toy);
-    let name = e.target[0].value;
-    let image = e.target[1].value;
-    const newToy = document.createElement('div');
-    const h2 = document.createElement('h2');
-    const img = document.createElement('img');
-    const p = document.createElement('p');
-    const btn = document.createElement('button');
-    newToy.classList = "card";
-    h2.innerText = name;
-    img.src = image;
-    // p.innerText = likes;
-    img.classList = "toy-avatar";
-    btn.classList = "like-btn";
-    btn.innerText = "LIKE!!";
-    newToy.append(h2);
-    newToy.append(img);
-    newToy.append(p);
-    newToy.append(btn);
-    toyDiv.append(newToy);
+    // // console.log(toy);
+    // let name = e.target[0].value;
+    // let image = e.target[1].value;
+    // const newToy = document.createElement('div');
+    // const h2 = document.createElement('h2');
+    // const img = document.createElement('img');
+    // const p = document.createElement('p');
+    // const btn = document.createElement('button');
+    // newToy.classList = "card";
+    // h2.innerText = name;
+    // img.src = image;
+    // // p.innerText = likes;
+    // img.classList = "toy-avatar";
+    // btn.classList = "like-btn";
+    // btn.innerText = "LIKE!!";
+    // newToy.append(h2);
+    // newToy.append(img);
+    // newToy.append(p);
+    // newToy.append(btn);
+    // toyDiv.append(newToy);
+    createToy();
     
   })
   
