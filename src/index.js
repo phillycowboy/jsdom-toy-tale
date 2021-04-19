@@ -1,7 +1,12 @@
 let addToy = false;
-
+const submitBtn = document.querySelector("#submit");
+const toyForm = document.querySelector('#add-new-toy');
+const addBtn = document.querySelector("#new-toy-btn");
+const toyFormContainer = document.querySelector(".container");
 const toyDiv = document.querySelector('#toy-collection');
+const likeBtn = document.querySelector("#like-btn");
 const baseUrl = "http://localhost:3000/toys";
+
 
 function getToys() {
    return fetch(baseUrl).then(function (res) {
@@ -31,11 +36,17 @@ function renderToys(toy) {
   img.classList = "toy-avatar";
   btn.classList = "like-btn";
   btn.innerText = "LIKE!!";
+  btn.id = "like-btn";
   newToy.append(h2);
   newToy.append(img);
   newToy.append(p);
   newToy.append(btn);
   toyDiv.append(newToy);
+  btn.addEventListener('click', (e) => {
+    // document.body.style.backgroundColor = 'red';
+    console.log(e.target.value);
+   
+  })
 }
 
 function createToy(formData) {
@@ -61,25 +72,45 @@ function createToy(formData) {
   }); 
 }
 
+// need to figure out a way to get the number and then increase it by 1 everytime you click the button. 
+
+function likeToy() {
+  let configObj = {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({ "likes": 1})
+  };
+  return fetch("http://localhost:3000/toys/:id", configObj)
+    .then(function (res) {
+      return res.json()
+    })
+    .then(function (json) {
+      // renderToys({ id: json.id, "name": formData[0].value, "image": formData[1].value, "likes": 0 });
+      console.log(json);
+    })
+    .catch(function (error) {
+      console.log(error)
+    });
+}
+
+
 
 getToys();
 
 
-const submitBtn = document.querySelector("#submit");
-const toyForm = document.querySelector('#add-new-toy');
-const addBtn = document.querySelector("#new-toy-btn");
-const toyFormContainer = document.querySelector(".container");
 
 toyForm.addEventListener('submit', (e) =>{
   e.preventDefault();
-  console.log(e.target[0].value);
-  console.log(e.target[1].value);
-  console.log(e.target[2].value);
-  // console.log(e.target[0].value)
-   createToy(e.target);
+  createToy(e.target);
     
 });
-  document.addEventListener("DOMContentLoaded", () => {
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
   
   addBtn.addEventListener("click", () => {
     // hide & seek with the form
@@ -90,11 +121,7 @@ toyForm.addEventListener('submit', (e) =>{
           } else {
             toyFormContainer.style.display = "none";
           }
-          // submitBtn.addEventListener('submit', function(e){
-          //   e.preventDefault();
-          //   createToy();
-          //   console.log("Did i make it?")
-          // })
+
         });
         
         
