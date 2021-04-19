@@ -38,7 +38,7 @@ function renderToys(toy) {
   toyDiv.append(newToy);
 }
 
-function createToy() {
+function createToy(name, image) {
   console.log("I was clicked");
   console.log("image", image)
   console.log("likes", likes)
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const toyFormContainer = document.querySelector(".container");
 
   toyForm.addEventListener('submit', (e) =>{
-    e.preventDefault()
+    e.preventDefault();
     // console.log(toy);
     let name = e.target[0].value;
     let image = e.target[1].value;
@@ -94,6 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
     newToy.append(p);
     newToy.append(btn);
     toyDiv.append(newToy);
+    
   })
   
   addBtn.addEventListener("click", () => {
