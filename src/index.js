@@ -73,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const toyFormContainer = document.querySelector(".container");
 
   toyForm.addEventListener('submit', (e) =>{
+    e.preventDefault()
     // console.log(toy);
     let name = e.target[0].value;
     let image = e.target[1].value;
