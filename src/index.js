@@ -37,6 +37,7 @@ function renderToys(toy) {
   btn.classList = "like-btn";
   btn.innerText = "LIKE!!";
   btn.id = "like-btn";
+  btn.setAttribute("toy-id", toy.id);
   newToy.append(h2);
   newToy.append(img);
   newToy.append(p);
@@ -45,7 +46,8 @@ function renderToys(toy) {
   btn.addEventListener('click', (e) => {
     // document.body.style.backgroundColor = 'red';
     console.log(e.target);
-    likes.innerHTML + 1;
+    let toyLikes = toy.likes + 1;
+    likeToy(e, toyLikes);
   })
 }
 
@@ -74,22 +76,24 @@ function createToy(formData) {
 
 // need to figure out a way to get the number and then increase it by 1 everytime you click the button. 
 
-function likeToy() {
+function likeToy(e, toyLikes) {
   let configObj = {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json"
     },
-    body: JSON.stringify({ "likes": 1})
+    body: JSON.stringify({ "likes": toyLikes})
   };
-  return fetch("http://localhost:3000/toys/:id", configObj)
+  console.log(e.target.attributes["toy-id"].value);
+  return fetch(`http://localhost:3000/toys/${e.target.attributes["toy-id"].value}`, configObj)
     .then(function (res) {
       return res.json()
     })
     .then(function (json) {
       // renderToys({ id: json.id, "name": formData[0].value, "image": formData[1].value, "likes": 0 });
-      console.log(json);
+      console.log(e.target);
+      e.target.previousElementSibling.innerText = json.likes;
       // likeBtn.addEventListener('click', () => {
       //   alert('hi!');
       // })
