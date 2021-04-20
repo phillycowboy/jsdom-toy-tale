@@ -91,12 +91,8 @@ function likeToy(e, toyLikes) {
       return res.json()
     })
     .then(function (json) {
-      // renderToys({ id: json.id, "name": formData[0].value, "image": formData[1].value, "likes": 0 });
       console.log(e.target);
       e.target.previousElementSibling.innerText = json.likes;
-      // likeBtn.addEventListener('click', () => {
-      //   alert('hi!');
-      // })
     })
     .catch(function (error) {
       console.log(error)
@@ -112,7 +108,6 @@ getToys();
 toyForm.addEventListener('submit', (e) =>{
   e.preventDefault();
   createToy(e.target);
-    
 });
 
 
@@ -121,7 +116,6 @@ document.addEventListener("DOMContentLoaded", () => {
   
   addBtn.addEventListener("click", () => {
     // hide & seek with the form
-    // console.log(submitBtn);
           addToy = !addToy;
           if (addToy) {
             toyFormContainer.style.display = "block";
@@ -129,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
             toyFormContainer.style.display = "none";
           }
 
-        });
+});
         
         
         
