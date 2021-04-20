@@ -44,8 +44,8 @@ function renderToys(toy) {
   toyDiv.append(newToy);
   btn.addEventListener('click', (e) => {
     // document.body.style.backgroundColor = 'red';
-    console.log(e.target.value);
-   
+    console.log(e.target);
+    likes.innerHTML + 1;
   })
 }
 
@@ -90,6 +90,9 @@ function likeToy() {
     .then(function (json) {
       // renderToys({ id: json.id, "name": formData[0].value, "image": formData[1].value, "likes": 0 });
       console.log(json);
+      // likeBtn.addEventListener('click', () => {
+      //   alert('hi!');
+      // })
     })
     .catch(function (error) {
       console.log(error)
