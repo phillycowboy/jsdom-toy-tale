@@ -44,7 +44,6 @@ function renderToys(toy) {
   newToy.append(btn);
   toyDiv.append(newToy);
   btn.addEventListener('click', (e) => {
-    // document.body.style.backgroundColor = 'red';
     console.log(e.target);
     let toyLikes = toy.likes + 1;
     likeToy(e, toyLikes);
